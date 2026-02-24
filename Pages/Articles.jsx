@@ -9,8 +9,6 @@ const Articles = ({
 }) => {
   return (
     <main>
-      {/* {error && <p>{error}</p>} */}
-
       <>
         <h3>List of Articles</h3>
         <ArticlesList
@@ -20,8 +18,10 @@ const Articles = ({
               <div>{item.author}</div>
               <div>{item.topic}</div>
               <img src={item.article_img_url} />
-              <div> {item.votes} votes</div>
-              <div>{item.comment_count} comments</div>
+              <div>
+                {item.votes} votes Published on {item.created_at}
+                {item.comment_count} comments
+              </div>
             </ol>
           ))}
         />
