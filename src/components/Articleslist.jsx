@@ -8,11 +8,7 @@ const ArticlesList = ({
   article_img_url,
   comment_count,
 }) => {
-  return (
-    <div>
-      <p> {title}</p>
-    </div>
-  );
+  return <div className="articlelist">{title}</div>;
 };
 
 export default ArticlesList;
