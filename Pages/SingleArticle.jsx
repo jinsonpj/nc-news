@@ -8,12 +8,13 @@ const SingleArticle = () => {
   const { article_id } = useParams();
 
   const [article, setArticle] = useState(null);
-  const [comments, setComment] = useState([]);
+  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
+
     Promise.all([
       axios.get(
         `https://nc-news-app-axmd.onrender.com/api/articles/${article_id}`,
@@ -24,11 +25,11 @@ const SingleArticle = () => {
     ])
       .then(([articleRes, commentsRes]) => {
         setArticle(articleRes.data.article);
-        setComment(commentsRes.data.comments);
+        setComments(commentsRes.data.comments);
         setIsLoading(false);
       })
       .catch(() => {
-        setError("Article not found");
+        setError("Failed to load article");
         setIsLoading(false);
       });
   }, [article_id]);

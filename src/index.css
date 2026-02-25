@@ -66,3 +66,25 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.comments-section {
+  width: auto;
+  border: 1px solid green;
+  padding: auto;
+  margin: 1em auto;
+}
+.article-card {
+  max-width: auto;
+  margin: 1em auto;
+  border: 1px solid #000000;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 20px;
+}
+.comment-card {
+  border: 1px solid #000000;
+  padding: 16px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
