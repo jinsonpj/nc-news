@@ -1,31 +1,32 @@
-import ArticlesList from "../src/components/articleslist";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import ArticleList from "../src/components/articleslist";
 
-const Articles = ({
-  items,
-  setItems,
-  dataIsLoaded,
-  setDataIsLoaded,
-  error,
-}) => {
+const Articles = () => {
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("https://nc-news-app-axmd.onrender.com/api/articles")
+      .then((res) => {
+        setArticles(res.data.articles);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError("Something went wrong");
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <main>
-      <>
-        <h3>List of Articles</h3>
-        <ArticlesList
-          title={items.articles.map((item) => (
-            <ol key={item.article_id} className="indart">
-              <div>{item.title}</div>
-              <div>{item.author}</div>
-              <div>{item.topic}</div>
-              <img src={item.article_img_url} />
-              <div>
-                {item.votes} votes Published on {item.created_at}
-                {item.comment_count} comments
-              </div>
-            </ol>
-          ))}
-        />
-      </>
+      <h3>List of Articles</h3>
+      <ArticleList articles={articles} />
     </main>
   );
 };

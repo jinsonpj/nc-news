@@ -1,14 +1,13 @@
-const ArticlesList = ({
-  author,
-  title,
-  article_id,
-  topic,
-  created_at,
-  votes,
-  article_img_url,
-  comment_count,
-}) => {
-  return <div className="articlelist">{title}</div>;
+import ArticleCard from "./ArticleCard";
+
+const ArticleList = ({ articles }) => {
+  return (
+    <section>
+      {articles.map((article) => (
+        <ArticleCard key={article.article_id} article={article} />
+      ))}
+    </section>
+  );
 };
 
-export default ArticlesList;
+export default ArticleList;
