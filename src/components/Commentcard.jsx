@@ -7,7 +7,6 @@ const CommentCard = ({ comment }) => {
       </p>
 
       <p>{comment.body}</p>
-
       <p>{comment.votes} votes</p>
     </ul>
   );
