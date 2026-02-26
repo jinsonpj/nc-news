@@ -11,7 +11,6 @@ const SingleArticleCard = ({ article, votes, handleVote }) => {
       Votes: {votes}
       {""}
       <VoteButton direction="up" handleVoteClick={handleVote} Upvote />
-      {/* <p>{article.votes} votes</p> */}
       <VoteButton direction="down" handleVoteClick={handleVote} Downvote />
       <p>Published on {new Date(article.created_at).toLocaleDateString()}</p>
     </article>

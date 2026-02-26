@@ -15,6 +15,8 @@ const SingleArticle = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [commentError, setCommentError] = useState(null);
 
+  const currentUser = "jessjelly";
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -75,6 +77,21 @@ const SingleArticle = () => {
       });
   };
 
+  const handleDeleteComment = (comment_id) => {
+    const originalComments = [...comments];
+    setComments((prev) => prev.filter((c) => c.comment_id !== comment_id));
+
+    return axios
+      .delete(
+        `https://nc-news-app-axmd.onrender.com/api/comments/${comment_id}`,
+      )
+      .catch(() => {
+        setComments(originalComments);
+        alert("Failed to delete comment. Try again.");
+        throw new Error("Delete failed");
+      });
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -85,7 +102,11 @@ const SingleArticle = () => {
         votes={votes}
         handleVote={handleVote}
       />
-      <CommentList comments={comments} />
+      <CommentList
+        comments={comments}
+        currentUser={currentUser}
+        onDelete={handleDeleteComment}
+      />
       <form
         onSubmit={(e) => {
           e.preventDefault();
