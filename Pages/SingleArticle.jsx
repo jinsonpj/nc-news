@@ -6,12 +6,14 @@ import CommentList from "../src/components/Commentlist";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
-
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [votes, setVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [commentError, setCommentError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,13 +45,36 @@ const SingleArticle = () => {
     axios
       .patch(
         `https://nc-news-app-axmd.onrender.com/api/articles/${article_id}`,
-        { incVotes },
+        { inc_votes: incVotes },
       )
       .catch((err) => {
         setVotes((prevVotes) => prevVotes - incVotes);
         setError("Voting Failed, try again");
       });
   };
+
+  const handlePostComment = () => {
+    if (!newComment.trim()) return;
+
+    setIsSubmitting(true);
+    setCommentError(null);
+
+    axios
+      .post(
+        `https://nc-news-app-axmd.onrender.com/api/articles/${article_id}/comments`,
+        { username: "jessjelly", body: newComment },
+      )
+      .then((res) => {
+        setComments((prev) => [res.data.comment, ...prev]);
+        setNewComment("");
+        setIsSubmitting(false);
+      })
+      .catch(() => {
+        setCommentError("Failed to post comment. Try again.");
+        setIsSubmitting(false);
+      });
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -61,6 +86,27 @@ const SingleArticle = () => {
         handleVote={handleVote}
       />
       <CommentList comments={comments} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handlePostComment();
+        }}
+      >
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write your comment here..."
+          disabled={isSubmitting}
+          required
+        />
+        <button
+          type="submit"
+          disabled={isSubmitting || newComment.trim() === ""}
+        >
+          {isSubmitting ? "Posting..." : "Post Comment"}
+        </button>
+        {commentError && <p className="error">{commentError}</p>}
+      </form>
     </main>
   );
 };
