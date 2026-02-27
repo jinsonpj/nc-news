@@ -96,38 +96,49 @@ const SingleArticle = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <main>
-      <SingleArticleCard
-        article={article}
-        votes={votes}
-        handleVote={handleVote}
-      />
-      <CommentList
-        comments={comments}
-        currentUser={currentUser}
-        onDelete={handleDeleteComment}
-      />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handlePostComment();
-        }}
-      >
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Write your comment here..."
-          disabled={isSubmitting}
-          required
+    <main className="single-article-page">
+      <div className="article-wrapper">
+        <SingleArticleCard
+          article={article}
+          votes={votes}
+          handleVote={handleVote}
         />
-        <button
-          type="submit"
-          disabled={isSubmitting || newComment.trim() === ""}
+      </div>
+
+      <div className="comments-section">
+        <CommentList
+          comments={comments}
+          currentUser={currentUser}
+          onDelete={handleDeleteComment}
+        />
+
+        <form
+          className="comment-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handlePostComment();
+          }}
         >
-          {isSubmitting ? "Posting..." : "Post Comment"}
-        </button>
-        {commentError && <p className="error">{commentError}</p>}
-      </form>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Write your comment here..."
+            disabled={isSubmitting}
+            required
+          />
+
+          <div className="form-actions">
+            <button
+              type="submit"
+              disabled={isSubmitting || newComment.trim() === ""}
+            >
+              {isSubmitting ? "Posting..." : "Post Comment"}
+            </button>
+          </div>
+
+          {commentError && <p className="error">{commentError}</p>}
+        </form>
+      </div>
     </main>
   );
 };
