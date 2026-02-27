@@ -97,20 +97,14 @@ const SingleArticle = () => {
 
   return (
     <main className="single-article-page">
-      <div className="article-wrapper">
-        <SingleArticleCard
-          article={article}
-          votes={votes}
-          handleVote={handleVote}
-        />
-      </div>
-
-      <div className="comments-section">
-        <CommentList
-          comments={comments}
-          currentUser={currentUser}
-          onDelete={handleDeleteComment}
-        />
+      <div className="article-layout">
+        <div className="article-wrapper">
+          <SingleArticleCard
+            article={article}
+            votes={votes}
+            handleVote={handleVote}
+          />
+        </div>
 
         <form
           className="comment-form"
@@ -138,6 +132,13 @@ const SingleArticle = () => {
 
           {commentError && <p className="error">{commentError}</p>}
         </form>
+      </div>
+      <div className="comments-section">
+        <CommentList
+          comments={comments}
+          currentUser={currentUser}
+          onDelete={handleDeleteComment}
+        />
       </div>
     </main>
   );
