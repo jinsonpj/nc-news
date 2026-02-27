@@ -14,7 +14,7 @@ const CommentCard = ({ comment, currentUser, onDelete }) => {
   };
 
   return (
-    <li className="comment-card">
+    <ul className="comment-card">
       <p>
         <strong>{comment.author}</strong>{" "}
         {new Date(comment.created_at).toLocaleDateString()}
@@ -31,7 +31,7 @@ const CommentCard = ({ comment, currentUser, onDelete }) => {
           {isDeleting ? "Deleting..." : "Delete"}
         </button>
       )}
-    </li>
+    </ul>
   );
 };
 

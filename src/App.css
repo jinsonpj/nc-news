@@ -1,7 +1,9 @@
 #root {
-  max-width: 1200px;
+  width: 100%;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .article-list {
@@ -12,6 +14,10 @@
 @media (min-width: 768px) {
   .article-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .single-article-card {
+    margin: 1rem;
+    padding: 1rem;
   }
 }
 
@@ -67,14 +73,58 @@
   color: #999;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .comments-section {
-  margin-top: 2rem;
+  margin-top: 2rem auto;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f8f9fb;
+  border-radius: 12px;
 }
 
 .comment-card {
   background: white;
-  border: 1px solid #ddd;
   padding: 1rem;
+  border-radius: 10px;
   margin-bottom: 1rem;
-  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.single-article-card {
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.single-article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
 }
