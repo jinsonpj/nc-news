@@ -64,7 +64,7 @@ const SingleArticle = () => {
     axios
       .post(
         `https://nc-news-app-axmd.onrender.com/api/articles/${article_id}/comments`,
-        { username: "jessjelly", body: newComment },
+        { username: currentUser, body: newComment },
       )
       .then((res) => {
         setComments((prev) => [res.data.comment, ...prev]);
