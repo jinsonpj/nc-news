@@ -28,6 +28,7 @@ Delete user comments
 Responsive layout
 
 **Installation**
+
 Clone the repository:
 
 git clone https://github.com/jinsonpj/nc-news.git
@@ -47,7 +48,9 @@ This project uses a custom REST API built with Node.js and PostgreSQL:
 https://github.com/jinsonpj/backend-nc-news
 
 **Minimum Requirements**
+
 Node.js v18+
 
 **Author**
+
 Jinson
